@@ -148,77 +148,79 @@ public final class QueryUtils {
 
         try {
             JSONObject baseJsonResponse = new JSONObject(bookJSON);
-            JSONArray items = baseJsonResponse.getJSONArray("items");
+            if (baseJsonResponse.has("items")) {
+                JSONArray items = baseJsonResponse.getJSONArray("items");
 
-            // Loop through each feature in the array
-            for (int i = 0; i < items.length(); i++) {
-                // Get book JSONObject at position i
-                JSONObject book = items.getJSONObject(i);
-                // Get "volumeInfo" JSONObject
-                JSONObject volumeInfo = book.getJSONObject("volumeInfo");
-                // Extract "title"
-                StringBuilder title = new StringBuilder(volumeInfo.getString("title"));
-                // Create title from title + subtitle
-                if (!volumeInfo.isNull("subtitle")) {
-                    // Extract "subtitle"
-                    String subtitle = volumeInfo.getString("subtitle");
-                    title.append(", ");
-                    title.append(subtitle);
-                }
-                // Create author from array
-                StringBuilder author = new StringBuilder();
-                if (!volumeInfo.isNull("authors")) {
-                    JSONArray authors = volumeInfo.getJSONArray("authors");
-                    if (authors.length() > 0) {
-                        author = new StringBuilder(authors.getString(0));
-                        if (authors.length() > 1) {
-                            for (int j = 1; j < authors.length(); j++) {
-                                author.append(" - ");
-                                author.append(authors.getString(j));
+                // Loop through each feature in the array
+                for (int i = 0; i < items.length(); i++) {
+                    // Get book JSONObject at position i
+                    JSONObject book = items.getJSONObject(i);
+                    // Get "volumeInfo" JSONObject
+                    JSONObject volumeInfo = book.getJSONObject("volumeInfo");
+                    // Extract "title"
+                    StringBuilder title = new StringBuilder(volumeInfo.getString("title"));
+                    // Create title from title + subtitle
+                    if (volumeInfo.has("subtitle")) {
+                        // Extract "subtitle"
+                        String subtitle = volumeInfo.getString("subtitle");
+                        title.append(", ");
+                        title.append(subtitle);
+                    }
+                    // Create author from array
+                    StringBuilder author = new StringBuilder();
+                    if (volumeInfo.has("authors")) {
+                        JSONArray authors = volumeInfo.getJSONArray("authors");
+                        if (authors.length() > 0) {
+                            author = new StringBuilder(authors.getString(0));
+                            if (authors.length() > 1) {
+                                for (int j = 1; j < authors.length(); j++) {
+                                    author.append(" - ");
+                                    author.append(authors.getString(j));
+                                }
                             }
                         }
                     }
-                }
-                // Create year from date (published date is returned in format yyyy-mm-dd)
-                String year = EMPTY_STRING;
-                if (!volumeInfo.isNull("publishedDate")) {
-                    String publishedDate = volumeInfo.getString("publishedDate");
-                    if (publishedDate.contains(LOCATION_SEPARATOR)) {
-                        String[] parts = publishedDate.split(LOCATION_SEPARATOR);
-                        year = parts[0];
-                    } else {
-                        year = publishedDate;
+                    // Create year from date (published date is returned in format yyyy-mm-dd)
+                    String year = EMPTY_STRING;
+                    if (volumeInfo.has("publishedDate")) {
+                        String publishedDate = volumeInfo.getString("publishedDate");
+                        if (publishedDate.contains(LOCATION_SEPARATOR)) {
+                            String[] parts = publishedDate.split(LOCATION_SEPARATOR);
+                            year = parts[0];
+                        } else {
+                            year = publishedDate;
+                        }
                     }
-                }
-                // Extract "thumbnail" for imageLink
-                String imageLink = EMPTY_STRING;
-                if (!volumeInfo.isNull("imageLinks")) {
-                    if (!volumeInfo.getJSONObject("imageLinks").isNull("thumbnail")) {
-                        imageLink = volumeInfo.getJSONObject("imageLinks").getString("thumbnail");
+                    // Extract "thumbnail" for imageLink
+                    String imageLink = EMPTY_STRING;
+                    if (volumeInfo.has("imageLinks")) {
+                        if (volumeInfo.getJSONObject("imageLinks").has("thumbnail")) {
+                            imageLink = volumeInfo.getJSONObject("imageLinks").getString("thumbnail");
+                        }
                     }
-                }
-                // Extract "infoLink" for bookUrl
-                String bookUrl = EMPTY_STRING;
-                if (!volumeInfo.isNull("infoLink")) {
-                    bookUrl = volumeInfo.getString("infoLink");
-                }
-                // Extract "averageRating" for ratting
-                Double ratting = 0.0;
-                if (!volumeInfo.isNull("averageRating")) {
-                    ratting = volumeInfo.getDouble("averageRating");
-                }
-                // Extract "textSnippet" for description
-                String description = EMPTY_STRING;
-                if (!book.isNull("searchInfo")) {
-                    if (!book.getJSONObject("searchInfo").isNull("textSnippet")) {
-                        description = book.getJSONObject("searchInfo").getString("textSnippet");
+                    // Extract "infoLink" for bookUrl
+                    String bookUrl = EMPTY_STRING;
+                    if (volumeInfo.has("infoLink")) {
+                        bookUrl = volumeInfo.getString("infoLink");
                     }
+                    // Extract "averageRating" for ratting
+                    Double ratting = 0.0;
+                    if (volumeInfo.has("averageRating")) {
+                        ratting = volumeInfo.getDouble("averageRating");
+                    }
+                    // Extract "textSnippet" for description
+                    String description = EMPTY_STRING;
+                    if (book.has("searchInfo")) {
+                        if (book.getJSONObject("searchInfo").has("textSnippet")) {
+                            description = book.getJSONObject("searchInfo").getString("textSnippet");
+                        }
+                    }
+                    // Create Earthquake java object from magnitude, location, and time
+                    Book parsedBook = new Book(title.toString(), author.toString(), year, description,
+                            imageLink, bookUrl, ratting);
+                    // Add earthquake to list of earthquakes
+                    books.add(parsedBook);
                 }
-                // Create Earthquake java object from magnitude, location, and time
-                Book parsedBook = new Book(title.toString(), author.toString(), year, description,
-                        imageLink, bookUrl, ratting);
-                // Add earthquake to list of earthquakes
-                books.add(parsedBook);
             }
         } catch (JSONException e) {
             Log.e(LOG_TAG, "Problem parsing the JSON results", e);
