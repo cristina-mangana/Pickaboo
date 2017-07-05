@@ -1,0 +1,47 @@
+<resources>
+    <!-- App Name-->
+    <string name="app_name" translatable="false">Pickaboo</string>
+
+    <!-- Welcome message [CHAR LIMIT = NONE]-->
+    <string name="welcome">Welcome</string>
+    <string name="intro">It\'s a nice day to discover a new book.\nWhat do you want to read
+        today?</string>
+
+    <!-- Search hint [CHAR LIMIT = 30]-->
+    <string name="search_hint">Enter title or author</string>
+
+    <!-- Last releases title [CHAR LIMIT = 20]-->
+    <string name="last_releases">Last releases</string>
+
+    <!-- Toast message for no query inserted [CHAR LIMIT = NONE]-->
+    <string name="query_error">Please insert your query</string>
+
+    <!-- Results screen title [CHAR LIMIT = NONE]-->
+    <string name="results">Results based on
+        \"<xliff.g example="Harry Potter" id="user query">%s</xliff.g>\"</string>
+
+    <!-- No results text [CHAR LIMIT = NONE]-->
+    <string name="no_results">No results found. Please try again</string>
+
+    <!-- Error text [CHAR LIMIT = 30]-->
+    <string name="error">Oops! It seems that an error has occurred. Please check your Internet
+    connection and come back in a while</string>
+
+    <!-- Text to introduce book author [CHAR LIMIT = 5]-->
+    <string name="by_author">by <xliff.g example="J.K. Rowling" id="author">%s</xliff.g></string>
+
+    <!-- Separator-->
+    <string name="separator">·</string>
+
+    <!-- About the book title [CHAR LIMIT = 20]-->
+    <string name="about_the_book">About the book</string>
+
+    <!-- Text to display when there isn't description [CHAR LIMIT = NONE]-->
+    <string name="no_info">No information available.</string>
+
+    <!-- View more button [CHAR LIMIT = 20]-->
+    <string name="view_more">View more</string>
+
+    <!--Action button title [CHAR LIMIT = 10]-->
+    <string name="action_search">Search</string>
+</resources>

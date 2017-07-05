@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#009688</color>
+    <color name="colorPrimaryLight">#52c7b8</color>
+    <color name="colorPrimaryDark">#00675b</color>
+
+    <color name="colorAccent">#009688</color>
+
+    <color name="primaryLightText">#FFFFFF</color>
+    <color name="secondaryLightText">#B3FFFFFF</color>
+    <color name="hintLightText">#80FFFFFF</color>
+    <color name="primaryDarkText">#D9000000</color>
+    <color name="secondaryDarkText">#8C000000</color>
+    <color name="hintDarkText">#66000000</color>
+
+    <!-- Rating stars colors-->
+    <color name="duskYellow">#fdd835</color>
+    <color name="lightYellow">#fff9c4</color>
+
+    <!-- Error screen backgroud color-->
+    <color name="lightBlue">#f3f3f3</color>
+
+</resources>

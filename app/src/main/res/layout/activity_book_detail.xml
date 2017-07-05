@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primaryLightText"
+    tools:context="com.example.android.pickaboo.BookDetailActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar">
+
+        <LinearLayout
+            android:id="@+id/activity_book_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/separation"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="@dimen/mediumPadding">
+
+            <ImageView
+                android:id="@+id/book_cover_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:ignore="contentDescription" />
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/bigPadding"
+                android:gravity="center_horizontal"
+                android:textColor="@color/primaryDarkText"
+                android:textSize="@dimen/titleSize" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="@dimen/smallPadding">
+
+                <TextView
+                    android:id="@+id/author"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    style="@style/normalTextStyle" />
+
+                <TextView
+                    android:id="@+id/separator"
+                    android:layout_width="wrap_content"
+                    android:paddingLeft="@dimen/smallPadding"
+                    android:paddingRight="@dimen/smallPadding"
+                    android:text="@string/separator"
+                    android:visibility="gone"
+                    style="@style/normalTextStyle" />
+
+                <TextView
+                    android:id="@+id/year"
+                    android:layout_width="wrap_content"
+                    style="@style/normalTextStyle" />
+            </LinearLayout>
+
+            <RatingBar
+                android:id="@+id/rating_bar"
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/mediumPadding"
+                android:backgroundTint="@color/duskYellow"
+                android:numStars="5"
+                android:progressTint="@color/duskYellow"
+                android:secondaryProgressTint="@color/lightYellow" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/separationWidth"
+                android:layout_marginTop="@dimen/mediumPadding"
+                android:background="@color/colorPrimaryLight" />
+
+            <TextView
+                android:text="@string/about_the_book"
+                style="@style/boldTitleStyle" />
+
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                style="@style/normalTextStyle" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/secondaryLightText"
+        android:padding="@dimen/mediumPadding">
+
+        <Button
+            android:id="@+id/view_more_button"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/smallPadding"
+            android:text="@string/view_more" />
+    </LinearLayout>
+
+</RelativeLayout>
